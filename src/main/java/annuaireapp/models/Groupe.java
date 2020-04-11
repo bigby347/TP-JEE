@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "Group")
-public class Group implements Serializable {
+public class Groupe implements Serializable {
 
     @NotNull
     @Id
@@ -24,11 +24,11 @@ public class Group implements Serializable {
             fetch = FetchType.LAZY, mappedBy = "group")
     private Set<Person> persons;
 
-    public Group() {
+    public Groupe() {
         super();
     }
 
-    public Group(Integer id,String name){
+    public Groupe(Integer id, String name){
         this.id = id;
         this.name= name;
     }
@@ -70,7 +70,7 @@ public class Group implements Serializable {
         if(persons == null){
             persons = new HashSet<>();
         }
-        p.setGroup(this);
+        p.setGroupe(this);
         persons.add(p);
     }
 }

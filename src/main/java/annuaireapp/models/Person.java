@@ -7,20 +7,36 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 
+@NamedQueries({
+        @NamedQuery(name = "Person.findAll", query = "Select p From Person p"),
+        @NamedQuery(name = "Person.findById", query = "Select p From Person p where p.id = :id"),
+        @NamedQuery(name = "Person.removeAll", query = "Delete From Person "),
+        @NamedQuery(name = "Person.remove", query = "delete from Person p where p.id = :id")
+})
+
 @Entity(name = "Person")
+
+@Table(name = "Person",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {
+                        "id","name","first_name", "email", "website",
+                        "birth_day","password","groupe"
+                })
+        })
 public class Person implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @NotNull
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
 
 
     @NotNull
     @Basic(optional = false)
-    @Column(name = "last_name", length = 100)
-    private String lastName;
+    @Column(name = "name", length = 100)
+    private String name;
 
     @NotNull
     @Basic(optional = false)
@@ -48,14 +64,14 @@ public class Person implements Serializable {
     private String password;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "group")
-    private Group group;
+    @JoinColumn(name = "groupe")
+    private Groupe groupe;
 
-    public Person(String lastName, String firstName,
+    public Person(String name, String firstName,
                   String email, String website,
                   Date birthDay, String password) {
         super();
-        this.lastName = lastName;
+        this.name = name;
         this.firstName = firstName;
         this.email =email;
         this.website =website;
@@ -71,13 +87,13 @@ public class Person implements Serializable {
     public String toString() {
         return "Person{" +
                 "id=" + id +
-                ", lastName='" + lastName + '\'' +
+                ", lastName='" + name + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", email='" + email + '\'' +
                 ", website='" + website + '\'' +
                 ", birthDay=" + birthDay +
                 ", password='" + password + '\'' +
-                ", group=" + group +
+                ", group=" + groupe +
                 '}';
     }
 
@@ -89,12 +105,12 @@ public class Person implements Serializable {
         this.id = id;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getName() {
+        return name;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String lastName) {
+        this.name = lastName;
     }
 
     public String getFirstName() {
@@ -137,11 +153,11 @@ public class Person implements Serializable {
         this.password = password;
     }
 
-    public Group getGroup() {
-        return group;
+    public Groupe getGroupe() {
+        return groupe;
     }
 
-    public void setGroup(Group group) {
-        this.group = group;
+    public void setGroupe(Groupe groupe) {
+        this.groupe = groupe;
     }
 }
