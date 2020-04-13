@@ -1,6 +1,7 @@
 package annuaireapp.dao;
 
-import annuaireapp.models.Groupe;
+import annuaireapp.models.Group;
+import annuaireapp.models.Person;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,32 +13,36 @@ import java.util.Optional;
 
 @Repository
 @Transactional
-public class GroupeDao implements IDao<Groupe> {
+public class GroupeDao implements IDao<Group> {
 
     @PersistenceContext(type = PersistenceContextType.TRANSACTION)
     EntityManager em;
 
     @Override
-    public Optional<Groupe> get(long id) {
-        return Optional.empty();
+    public Optional<Group> get(long id) {
+        Group g = em.find(Group.class,id);
+        return Optional.ofNullable(g);
     }
 
     @Override
-    public List<Groupe> findAll() {
-        return null;
+    public List<Group> findAll() {
+        List<Group> result = em.createNamedQuery("Group.findAll").getResultList();
+        if(result.isEmpty()) System.err.println("Groups is empty");
+        return result;
     }
 
     @Override
-    public void add(Groupe groupe) {
-        em.persist(groupe);
+    public void add(Group group) {
+        em.persist(group);
     }
 
     @Override
-    public void update(Groupe groupe) {
+    public void update(Group group) {
+        em.merge(group);
     }
 
     @Override
-    public void remove(Groupe groupe) {
-
+    public void remove(Group group) {
+        em.remove(group);
     }
 }

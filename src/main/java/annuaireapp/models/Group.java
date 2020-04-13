@@ -6,8 +6,16 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+@NamedQueries({
+        @NamedQuery(name = "Group.findAll", query = "Select g From Group g"),
+        @NamedQuery(name = "Group.findById", query = "Select g From Group g where g.id = :id"),
+        @NamedQuery(name = "Group.removeAll", query = "Delete From Group"),
+        @NamedQuery(name = "Group.remove", query = "delete from Group g where g.id = :id")
+})
+
+
 @Entity(name = "Group")
-public class Groupe implements Serializable {
+public class Group implements Serializable {
 
     @NotNull
     @Id
@@ -24,11 +32,11 @@ public class Groupe implements Serializable {
             fetch = FetchType.LAZY, mappedBy = "group")
     private Set<Person> persons;
 
-    public Groupe() {
+    public Group() {
         super();
     }
 
-    public Groupe(Integer id, String name){
+    public Group(Integer id, String name){
         this.id = id;
         this.name= name;
     }
@@ -70,7 +78,7 @@ public class Groupe implements Serializable {
         if(persons == null){
             persons = new HashSet<>();
         }
-        p.setGroupe(this);
+        p.setGroup(this);
         persons.add(p);
     }
 }

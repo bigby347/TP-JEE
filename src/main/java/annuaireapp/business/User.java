@@ -26,7 +26,6 @@ public class User implements Serializable {
         this.id = 0;
         this.name = "Anonymous";
         this.first_name = "Anonymous";
-        this.email = "Unknown";
     }
 
     public Integer getId() {
@@ -53,11 +52,4 @@ public class User implements Serializable {
         this.first_name = first_name;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 }

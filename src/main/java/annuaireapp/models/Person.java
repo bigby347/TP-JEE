@@ -65,7 +65,7 @@ public class Person implements Serializable {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "groupe")
-    private Groupe groupe;
+    private Group group;
 
     public Person(String name, String firstName,
                   String email, String website,
@@ -93,7 +93,7 @@ public class Person implements Serializable {
                 ", website='" + website + '\'' +
                 ", birthDay=" + birthDay +
                 ", password='" + password + '\'' +
-                ", group=" + groupe +
+                ", group=" + group +
                 '}';
     }
 
@@ -153,11 +153,11 @@ public class Person implements Serializable {
         this.password = password;
     }
 
-    public Groupe getGroupe() {
-        return groupe;
+    public Group getGroup() {
+        return group;
     }
 
-    public void setGroupe(Groupe groupe) {
-        this.groupe = groupe;
+    public void setGroup(Group group) {
+        this.group = group;
     }
 }
