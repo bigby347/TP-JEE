@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @ComponentScan("annuaireapp.dao")
 @EnableTransactionManagement
-@PropertySource("src/main/resources/application.properties")
+@PropertySource("application.properties")
 public class SpringConfiguration {
 
     /*
