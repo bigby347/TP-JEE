@@ -9,20 +9,12 @@ import java.util.Date;
 
 @NamedQueries({
         @NamedQuery(name = "Person.findAll", query = "Select p From Person p"),
-        @NamedQuery(name = "Person.findById", query = "Select p From Person p where p.id = :id"),
         @NamedQuery(name = "Person.removeAll", query = "Delete From Person "),
         @NamedQuery(name = "Person.remove", query = "delete from Person p where p.id = :id")
 })
 
 @Entity(name = "Person")
-
-@Table(name = "Person",
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = {
-                        "id","name","first_name", "email", "website",
-                        "birth_day","password","groupe"
-                })
-        })
+@Table(name = "Person")
 public class Person implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -65,7 +57,7 @@ public class Person implements Serializable {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "groupe")
-    private Group group;
+    private Group groupe;
 
     public Person(String name, String firstName,
                   String email, String website,
@@ -93,7 +85,7 @@ public class Person implements Serializable {
                 ", website='" + website + '\'' +
                 ", birthDay=" + birthDay +
                 ", password='" + password + '\'' +
-                ", group=" + group +
+                ", group=" + groupe +
                 '}';
     }
 
@@ -154,10 +146,10 @@ public class Person implements Serializable {
     }
 
     public Group getGroup() {
-        return group;
+        return groupe;
     }
 
     public void setGroup(Group group) {
-        this.group = group;
+        this.groupe = group;
     }
 }

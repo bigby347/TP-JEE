@@ -1,4 +1,5 @@
 package annuaireapp.dao;
+
 import java.util.Properties;
 
 import javax.persistence.EntityManagerFactory;
@@ -19,7 +20,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@ComponentScan("annuaireapp.dao")
+@ComponentScan(basePackages = { "annuaireapp.dao", "annuaireapp.business" })
 @EnableTransactionManagement
 @PropertySource("application.properties")
 public class SpringConfiguration {
@@ -29,10 +30,10 @@ public class SpringConfiguration {
      */
     @Bean
     public DataSource dataSource(//
-                                 @Value("${spring.datasource.driverName}") String driverName, //
-                                 @Value("${spring.datasource.url}") String url, //
-                                 @Value("${spring.datasource.user}") String user, //
-                                 @Value("${spring.datasource.password}") String password) {
+            @Value("${spring.datasource.driverName}") String driverName, //
+            @Value("${spring.datasource.url}") String url, //
+            @Value("${spring.datasource.user}") String user, //
+            @Value("${spring.datasource.password}") String password) {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(driverName);
         dataSource.setUrl(url);
@@ -46,18 +47,18 @@ public class SpringConfiguration {
      * choix d'hibernate. Cette configuration remplace le fichier
      * persistence.xml
      */
-    @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Autowired DataSource ds) {
-        var em = new LocalContainerEntityManagerFactoryBean();
+    @Bean("mydata")
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(//
+            @Autowired DataSource ds) {
+        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(ds);
-        em.setPackagesToScan(new String[] { "myapp.model" });
+        em.setPackagesToScan(new String[] { "annuaireapp.models", "annuaireapp.business" });
         em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         em.setBeanName("mydata");
         // Configuration d'hibernate
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
-        properties.setProperty("hibernate.dialect", //
-                "org.hibernate.dialect.HSQLDialect");
+        properties.setProperty("hibernate.hbm2ddl.auto", "update");
+        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");
         properties.setProperty("hibernate.show_sql", "true");
         properties.setProperty("hibernate.format_sql", "true");
         em.setJpaProperties(properties);

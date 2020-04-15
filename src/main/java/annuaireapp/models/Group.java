@@ -7,14 +7,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 @NamedQueries({
-        @NamedQuery(name = "Group.findAll", query = "Select g From Group g"),
-        @NamedQuery(name = "Group.findById", query = "Select g From Group g where g.id = :id"),
-        @NamedQuery(name = "Group.removeAll", query = "Delete From Group"),
-        @NamedQuery(name = "Group.remove", query = "delete from Group g where g.id = :id")
+        @NamedQuery(name = "Group.findAll", query = "Select g From Groupe g"),
+        @NamedQuery(name = "Group.removeAll", query = "Delete From Groupe"),
+        @NamedQuery(name = "Group.remove", query = "delete from Groupe g where g.id = :id")
 })
 
 
-@Entity(name = "Group")
+@Entity(name = "Groupe")
 public class Group implements Serializable {
 
     @NotNull
@@ -29,7 +28,7 @@ public class Group implements Serializable {
 
     @OneToMany(//
             cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE },
-            fetch = FetchType.LAZY, mappedBy = "group")
+            fetch = FetchType.LAZY, mappedBy = "groupe")
     private Set<Person> persons;
 
     public Group() {
@@ -40,15 +39,7 @@ public class Group implements Serializable {
         this.id = id;
         this.name= name;
     }
-
-    @Override
-    public String toString() {
-        return "Group{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", persons=" + persons.toString() +
-                '}';
-    }
+    
 
     public Integer getId() {
         return id;

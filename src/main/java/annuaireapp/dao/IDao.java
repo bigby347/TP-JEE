@@ -1,17 +1,23 @@
 package annuaireapp.dao;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.Collection;
 
-public interface IDao<T> {
+import annuaireapp.models.Group;
+import annuaireapp.models.Person;
 
-    public Optional<T> get(long id);
+public interface IDao {
 
-    public List<T> findAll();
 
-    public void add(T t);
+	public Collection<Group> findAllGroups();
 
-    public void update(T t);
+	public Collection<Person>findAllPerson();
 
-    public void remove(T t);
+	public Collection<Person>  findAllPersonsInGroup(long idGroup);
+
+	public <T> T find(Class<T> clazz,Object id);
+	public <T> void add(T t);
+	public <T> void update(T t);
+
+	public <T> void remove(T t);
+	//public <T> Collection<T> findByStringProperty(Class<T> clazz, String propertyName, String propertyValue);
 }
