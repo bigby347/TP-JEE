@@ -10,7 +10,7 @@ public interface IDao {
 
 	public Collection<Group> findAllGroups();
 
-	public Collection<Person>findAllPerson();
+	public Collection<Person> findAllPerson();
 
 	public Collection<Person>  findAllPersonsInGroup(long idGroup);
 

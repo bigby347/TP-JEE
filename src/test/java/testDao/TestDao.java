@@ -42,27 +42,20 @@ public class TestDao {
     static DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
     static Person p1, p2, p3;
     static Group g1, g2;
-    static Date date1, date2, date3;
 
     @BeforeAll
     public static void beforeAll() {
+        g1 = new Group(1, "M1");
         g2 = new Group(2, "M2");
 
-        try {
-            date1 = df.parse("13-07-1942");
-            date2 = df.parse("26-05-1995");
-            date3 = df.parse("01-01-2020");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
         p1 = new Person("Rian", "Jacques", "jacques.rian@gmail.com",
-                "rian.com", date1, "password");
+                "rian.com", "13-07-1942", "password");
 
         p2 = new Person("Jordin", "Michel", "jordin.michel@gmail.com",
-                "jordin.com", date2, "annuaire");
+                "jordin.com", "26-05-1995", "annuaire");
 
         p3 = new Person("Petit", "Pompe", "pompe.petit@gmail.com",
-                "lilpump.com", date3, "12345678");
+                "lilpump.com", "01-01-2020", "12345678");
 
         p1.setGroup(g1);
         p2.setGroup(g2);
@@ -75,10 +68,37 @@ public class TestDao {
 
     @Test
     public void testAddGroup() {
-        g1 = new Group(1, "M1");
+
         dao.add(g1);
         Group result = dao.find(Group.class, g1.getId());
         assertEquals(result.getId(), g1.getId());
 
     }
+
+    @Test
+    public void testAddPerson(){
+        dao.add(p1);
+        Person result = dao.find(Person.class,p1.getId());
+        assertEquals(p1.getId(),result.getId());
+    }
+
+
+    @Test
+    public void testUpdate(){
+        dao.add(g2);
+        dao.add(p2);
+
+        p2.setName("Toto");
+        dao.update(p2);
+
+        Person result = dao.find(Person.class,p2.getId());
+        assertEquals(result.getName(),"Toto");
+
+    }
+
+    @Test
+    public void testFindAll(){
+        //TODO
+    }
+
 }

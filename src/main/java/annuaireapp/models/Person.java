@@ -5,6 +5,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @NamedQueries({
@@ -61,13 +64,13 @@ public class Person implements Serializable {
 
     public Person(String name, String firstName,
                   String email, String website,
-                  Date birthDay, String password) {
+                  String birthDay, String password) {
         super();
         this.name = name;
         this.firstName = firstName;
         this.email =email;
         this.website =website;
-        this.birthDay = birthDay;
+        this.birthDay = stringToDate(birthDay);
         this.password =password;
     }
 
@@ -133,8 +136,9 @@ public class Person implements Serializable {
         return birthDay;
     }
 
-    public void setBirthDay(Date birthDay) {
-        this.birthDay = birthDay;
+    public void setBirthDay(String birthDay) {
+
+        this.birthDay = stringToDate(birthDay);
     }
 
     public String getPassword() {
@@ -151,5 +155,20 @@ public class Person implements Serializable {
 
     public void setGroup(Group group) {
         this.groupe = group;
+    }
+
+
+    /*Fonction utile*/
+
+    /* Tranforme une chaine de caratère de la forme (dd-MM-yyyy) en objet de type Date*/
+    public static Date stringToDate(String date){
+        DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        Date d = new Date();
+        try {
+            d=df.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return d;
     }
 }
