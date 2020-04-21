@@ -13,19 +13,18 @@ public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer id;
     private String name;
-    private String first_name;
-    private String email;
+    private String firstName;
 
-    public User(Integer id, String name, String first_name) {
+    public User(Integer id, String name, String firstName) {
         this.id = id;
         this.name = name;
-        this.first_name = first_name;
+        this.firstName = firstName;
     }
 
     public User(){
         this.id = 0;
         this.name = "Anonymous";
-        this.first_name = "Anonymous";
+        this.firstName = "Anonymous";
     }
 
     public Integer getId() {
@@ -44,12 +43,13 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
+
 
 }

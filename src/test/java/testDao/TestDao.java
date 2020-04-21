@@ -1,7 +1,6 @@
 package testDao;
 
 
-import annuaireapp.dao.Dao;
 import annuaireapp.dao.IDao;
 
 import annuaireapp.dao.SpringConfiguration;
@@ -18,15 +17,12 @@ import org.springframework.test.context.ContextConfiguration;
 
 
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.management.openmbean.TabularData;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Collection;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 @ExtendWith(SpringExtension.class)
@@ -40,13 +36,14 @@ public class TestDao {
     IDao dao;
 
     static DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-    static Person p1, p2, p3;
-    static Group g1, g2;
+    static Person p1, p2, p3,p4;
+    static Group g1, g2,g3;
 
     @BeforeAll
     public static void beforeAll() {
-        g1 = new Group(1, "M1");
-        g2 = new Group(2, "M2");
+        g1 = new Group(100000, "M1");
+        g2 = new Group(200000, "M2");
+        g3 = new Group(300000, "L3");
 
         p1 = new Person("Rian", "Jacques", "jacques.rian@gmail.com",
                 "rian.com", "13-07-1942", "password");
@@ -57,9 +54,12 @@ public class TestDao {
         p3 = new Person("Petit", "Pompe", "pompe.petit@gmail.com",
                 "lilpump.com", "01-01-2020", "12345678");
 
-        p1.setGroup(g1);
-        p2.setGroup(g2);
-        p3.setGroup(g2);
+        p4 = new Person("Test", "Email", "test.email@gmail.com",
+                "test.com", "01-01-2020", "12345678");
+        p1.setGroupe(g1);
+        p2.setGroupe(g2);
+        p3.setGroupe(g2);
+        p4.setGroupe(g3);
     }
 
 
@@ -85,7 +85,7 @@ public class TestDao {
 
     @Test
     public void testUpdate(){
-        dao.add(g2);
+        dao.update(g2);
         dao.add(p2);
 
         p2.setName("Toto");
@@ -99,6 +99,35 @@ public class TestDao {
     @Test
     public void testFindAll(){
         //TODO
+    }
+
+    @Test
+    public void testFindPersonsByname(){
+        dao.update(g2);
+        p3.setName("totob");
+        dao.add(p3);
+
+        Collection<Person> personList = dao.findPersonsByName("toto");
+        System.out.println("lol");
+
+        for (Person person :personList){
+            assertTrue(person.getName().contains("toto"));
+        }
+
+    }
+
+    @Test
+    public void testFindByEmail(){
+        dao.add(g3);
+        dao.add(p4);
+        Person p = dao.findPersonByEmail("test.email@gmail.com");
+        assertEquals("test.email@gmail.com",p.getEmail());
+    }
+
+    @Test
+    public void testFindByEmailNotFound(){
+       Person p = dao.findPersonByEmail("test@gmail.com");
+        assertNull(p);
     }
 
 }

@@ -8,8 +8,8 @@
 <body class="d-flex flex-column h-100">
 <%@include file="navbar.jsp"%>
 <div class="container" style="margin-top:100px">
-    <%@include file="groupShow.jsp"%>
-    <%@include file="personList.jsp"%>
+    <h2>Bonjour</h2>
+    <p>${user.name}</p>
 </div>
 
 

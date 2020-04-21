@@ -10,7 +10,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -23,11 +22,10 @@ public class DataInsert {
     @Autowired
     IDao dao;
 
-    String names[] = {"Rian", "Jordin", "Petit", "Lothbrock", "McGill", "Goddman", "White", "Pinkman", "Saeba", "Queen", "Wayne", "Teller", "Hunt", "DeSanta", "Croft"};
-    String firstNames[] = {"Bob", "Jacques", "Michel", "Ryo", "Jackson", "Saul", "James", "Walter", "Bruce", "Thomas", "Alfred", "Ethan",
-            "Jean", "Pierre", "Jesse", "Oliver", "Benjamin", "Claire", "Jade", "Elise", "Selena", "Kate", "Emma", "Yasmine", "Anne", "Lara"};
+    String names[] = {"Rian", "Jordin", "Petit", "Lothbrock", "McGill", "Goodman", "White", "Pinkman", "Saeba", "Queen", "Wayne", "Teller", "Hunt", "DeSanta", "Croft"};
+    String firstNames[] = {"Bob", "Jacques", "Michel", "Gabriel", "Lucas", "Louis", "Pierre", "Jean", "Victor", "Paul", "Antoine", "Nathan"};
 
-    String groupNames[] = {"ILD", "FSI", "IAAA", "GIG", "IMD", "STAPS", "GEA", "GEII", "BIO"};
+    String groupNames[] = {"ILD", "FSI", "IAAA", "GIG", "IMD"};
     String cursus[] = {"L1", "L2", "L3", "M1", "M2"};
     String year[] = {"2015/2016", "2016/2017", "2017/2018", "2018/2019", "2019/2020", "2020/2021"};
 
@@ -37,18 +35,30 @@ public class DataInsert {
         Random random = new Random();
         for (int j = 0; j < names.length; j++) {
             for (int i = 0; i < firstNames.length; i++) {
-                for (int k = 0; k < firstNames.length; k++) {
-                    int groupId = random.nextInt(groupList.size());
-                    Person p = new Person();
+                int groupId = random.nextInt(groupList.size());
+                Person p = new Person();
 
-                    p.setName(names[j]);
-                    p.setFirstName(firstNames[i]+" "+firstNames[k]);
-                    p.setEmail(names[j] + firstNames[i]+"-"+firstNames[k] + i + j + k + "@gmail.com");
-                    p.setBirthDay("01-01-1997");
-                    p.setWebsite(names[j] + firstNames[i]+"-"+firstNames[k] + i + j + k + ".fr");
-                    p.setPassword(names[j] + firstNames[i]+"-"+firstNames[k] + i + j + k);
-                    p.setGroup(groupList.get(groupId));
-                    dao.add(p);
+                p.setName(names[j]);
+                p.setFirstName(firstNames[i]);
+                p.setEmail(names[j] + firstNames[i] + i + j + "@gmail.com");
+                p.setBirthDay("1997-01-01");
+                p.setWebsite("www."+names[j] + firstNames[i] + i + j+ ".fr");
+                p.setPassword(names[j] + firstNames[i]  + i + j);
+                p.setGroupe(groupList.get(groupId));
+                dao.add(p);
+
+                for (int k = 0; k < firstNames.length; k++) {
+                    groupId = random.nextInt(groupList.size());
+                    Person p2 = new Person();
+
+                    p2.setName(names[j]);
+                    p2.setFirstName(firstNames[i] + "-" + firstNames[k]);
+                    p2.setEmail(names[j] + firstNames[i] + "-" + firstNames[k] + i + j + k + "@gmail.com");
+                    p2.setBirthDay("1992-08-05");
+                    p2.setWebsite("www." + names[j] + firstNames[i] + firstNames[k] + i + j + k + ".fr");
+                    p2.setPassword(names[j] + firstNames[i] + firstNames[k] + i + j + k);
+                    p2.setGroupe(groupList.get(groupId));
+                    dao.add(p2);
                 }
             }
         }

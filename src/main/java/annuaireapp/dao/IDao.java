@@ -10,9 +10,15 @@ public interface IDao {
 
 	public Collection<Group> findAllGroups();
 
-	public Collection<Person> findAllPerson();
+	public Collection<Person> findAllPersons();
 
-	public Collection<Person>  findAllPersonsInGroup(long idGroup);
+	public Collection<Person>  findAllPersonsInGroup(Integer idGroup);
+
+	public Collection<Person> findPersonsByName(String research);
+
+	public Collection<Group> findGroupsByName(String research);
+
+	public Person findPersonByEmail(String email);
 
 	public <T> T find(Class<T> clazz,Object id);
 	public <T> void add(T t);

@@ -1,6 +1,7 @@
 package annuaireapp.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -11,9 +12,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @NamedQueries({
-        @NamedQuery(name = "Person.findAll", query = "Select p From Person p"),
+        @NamedQuery(name = "Person.findAll", query = "Select p From Person p ORDER BY p.name"),
         @NamedQuery(name = "Person.removeAll", query = "Delete From Person "),
-        @NamedQuery(name = "Person.remove", query = "delete from Person p where p.id = :id")
+        @NamedQuery(name = "Person.remove", query = "Select p from Person p Where p.id = :id"),
+        @NamedQuery(name = "Person.findByName",query = "Select p From Person p Where p.name LIKE :research or p.firstName like :research"),
+        @NamedQuery(name = "Person.findInGroup",query = "SELECT p FROM Person p WHERE p.groupe= :ownGroup ORDER BY p.name"),
+        @NamedQuery(name = "Person.findByEmail",query = "Select p From Person p Where p.email = :email ORDER BY p.name")
 })
 
 @Entity(name = "Person")
@@ -21,12 +25,16 @@ import java.util.Date;
 public class Person implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @NotNull
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private Long id;
+    private Integer id;
 
+    @NotNull
+    @Basic(optional = false)
+    @Column(name = "email",unique = true)
+    @Email(message = "Email address is invalid")
+    private String email;
 
     @NotNull
     @Basic(optional = false)
@@ -38,10 +46,6 @@ public class Person implements Serializable {
     @Column(name = "first_name", length = 100)
     private String firstName;
 
-    @NotNull
-    @Basic(optional = false)
-    @Column(name = "email")
-    private String email;
 
     @Basic(optional = false)
     @Column(name = "website")
@@ -92,11 +96,11 @@ public class Person implements Serializable {
                 '}';
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -149,11 +153,11 @@ public class Person implements Serializable {
         this.password = password;
     }
 
-    public Group getGroup() {
+    public Group getGroupe() {
         return groupe;
     }
 
-    public void setGroup(Group group) {
+    public void setGroupe(Group group) {
         this.groupe = group;
     }
 
@@ -162,7 +166,8 @@ public class Person implements Serializable {
 
     /* Tranforme une chaine de caratère de la forme (dd-MM-yyyy) en objet de type Date*/
     public static Date stringToDate(String date){
-        DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        if (date == null) return null;
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date d = new Date();
         try {
             d=df.parse(date);

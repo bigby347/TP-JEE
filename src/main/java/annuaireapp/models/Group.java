@@ -7,9 +7,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 @NamedQueries({
-        @NamedQuery(name = "Group.findAll", query = "Select g From Groupe g"),
+        @NamedQuery(name = "Group.findAll", query = "Select g From Groupe g ORDER BY g.name"),
         @NamedQuery(name = "Group.removeAll", query = "Delete From Groupe"),
-        @NamedQuery(name = "Group.remove", query = "delete from Groupe g where g.id = :id")
+        @NamedQuery(name = "Group.remove", query = "delete from Groupe g where g.id = :id"),
+        @NamedQuery(name = "Group.findByName",query = "Select g From Groupe g where g.name LIKE :research ORDER BY g.name")
 })
 
 
@@ -69,7 +70,7 @@ public class Group implements Serializable {
         if(persons == null){
             persons = new HashSet<>();
         }
-        p.setGroup(this);
+        p.setGroupe(this);
         persons.add(p);
     }
 }
