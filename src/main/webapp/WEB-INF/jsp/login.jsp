@@ -9,13 +9,13 @@
 <body class="d-flex flex-column h-100">
 <div class="container">
     <form method="get" action="/home">
-        <button type="submit" class="btn btn-default">
-            <span class="glyphicon glyphicon-chevron-left"></span>Retour</a>
+        <button type="submit" class="btn btn-outline-dark">
+            Back
         </button>
     </form>
 
     <form action="/connection" method="POST" class="form-signin">
-        <h2 class="form-signin-heading">Se connecter</h2>
+        <h2 class="form-signin-heading">Sign in</h2>
         <label for="inputEmail" class="sr-only">Email address</label>
         <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email address"
                required="" autofocus="">
