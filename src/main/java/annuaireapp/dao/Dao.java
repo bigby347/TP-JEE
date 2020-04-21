@@ -61,7 +61,7 @@ public class Dao implements annuaireapp.dao.IDao {
     public Collection<Person> findPersonsByName(String research) {
         Collection<Person> collection = new ArrayList<>();
         try {
-            collection =em.createNamedQuery("Person.findByName", Person.class).setParameter("research", research + "%").getResultList();
+            collection =em.createNamedQuery("Person.findByName", Person.class).setParameter("research", "%" + research + "%").getResultList();
         }catch (Exception e){
             logger.info("Entity not Found -> findPersonsByName()");
             collection = null;
@@ -74,7 +74,7 @@ public class Dao implements annuaireapp.dao.IDao {
     public Collection<Group> findGroupsByName(String research) {
         Collection<Group> collection = new ArrayList<>();
         try {
-            collection = em.createNamedQuery("Group.findByName", Group.class).setParameter("research", research + "%").getResultList();
+            collection = em.createNamedQuery("Group.findByName", Group.class).setParameter("research", "%"+ research + "%").getResultList();
         }catch (Exception e){
             logger.info("Entity not Found -> findGroupsByName()");
             collection = null;

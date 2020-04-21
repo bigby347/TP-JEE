@@ -38,7 +38,7 @@ public class GroupController {
 
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     public ModelAndView list(){
-        logger.info("Group List Page loaded");
+        logger.info("Groups List Page loaded");
 
         return new ModelAndView("groupList","groups",groups());
     }

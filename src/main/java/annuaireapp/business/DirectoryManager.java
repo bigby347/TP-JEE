@@ -74,7 +74,7 @@ public class DirectoryManager implements IDirectoryManager {
     }
 
     @Override
-    public Collection<Group> findGroupByName(User user, String research) {
+    public Collection<Group> findGroupsByName(User user, String research) {
         return dao.findGroupsByName(research);
     }
 

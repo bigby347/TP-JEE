@@ -22,7 +22,7 @@ public interface IDirectoryManager {
 
     Collection<Group> findAllGroups();
 
-    Collection<Group> findGroupByName(User user, String research);
+    Collection<Group> findGroupsByName(User user, String research);
 
     Collection<Person> findPersonsByName(User user, String research);
 

@@ -2,6 +2,7 @@ package annuaireapp.web.controller;
 
 import annuaireapp.business.IDirectoryManager;
 import annuaireapp.business.User;
+import annuaireapp.models.Group;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,25 @@ public class UserController {
             return new ModelAndView("redirect:login");
         }
     }
+
+    @RequestMapping(value="/search",method = RequestMethod.GET)
+    public String search(){
+        logger.info("Login page loaded");
+        return "search";
+    }
+
+    @RequestMapping(value = "/searchGroups")
+    public ModelAndView searchGroups(
+            @RequestParam(value = "inputGroupResearch",required = true) String inputResearch
+    ){
+        return new ModelAndView("groupList", "groups",manager.findGroupsByName(user,inputResearch));
+    }
+
+    @RequestMapping(value = "/searchPersons")
+    public ModelAndView searchPersons(@RequestParam(value = "inputPersonResearch",required = true) String inputResearch){
+        return new ModelAndView("personList", "persons",manager.findGroupsByName(user,inputResearch));
+    }
+
     @ModelAttribute("user")
     public User newUser() {
         return user;

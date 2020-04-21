@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 
 @Controller
@@ -35,11 +36,16 @@ public class PersonController {
     public User newUser() {
         return user;
     }
-    /* @RequestMapping(value = "/show/{id}")
-     public ModelAndView show(@PathVariable("id") Integer id){
-         logger.info("Show person with id ="+id);
-         return new ModelAndView("person","person",manager.findPerson(user,id));
-     }*/
+
+    @ModelAttribute("persons")
+    Collection<Person> persons(){ return manager.findAllPersons(user);}
+
+    @RequestMapping(value = "/list",method = RequestMethod.GET)
+    public ModelAndView list(){
+        logger.info("Persons List Page loaded");
+        return new ModelAndView("personList","persons",persons());
+    }
+
     @RequestMapping(value = "/show/{id}")
     public ModelAndView show(@PathVariable("id") Integer id) {
         logger.info("Show person with id =" + id);
