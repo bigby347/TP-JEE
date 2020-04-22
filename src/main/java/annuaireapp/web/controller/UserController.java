@@ -10,12 +10,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 @RequestMapping("")
 @SessionAttributes("user")
 public class UserController {
 
     protected final Log logger = LogFactory.getLog(getClass());
+
+    private static String previouspage;
+
     @Autowired
     IDirectoryManager manager;
 
@@ -29,14 +34,16 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login",method = RequestMethod.GET)
-    public String login(){
+    public String login(HttpServletRequest request){
         logger.info("Login page loaded");
+        previouspage = request.getHeader("Referer");
+        logger.info(previouspage);
 
         return "login";
     }
 
     @RequestMapping(value = "/logout",method = RequestMethod.GET)
-    public ModelAndView logout(){
+    public ModelAndView logout(HttpServletRequest request){
         logger.info("Logout user");
         user = manager.logout(user);
         return new ModelAndView("index","user",user);
@@ -49,9 +56,10 @@ public class UserController {
     ){
         if (manager.login(user,inputEmail,inputPassword)){
             logger.info("Login user with id:" + user.getId());
-            return new ModelAndView("redirect:home","user",user);
+            return new ModelAndView("redirect:"+previouspage,"user",user);
         } else {
             logger.info("Invalid user or password");
+
             return new ModelAndView("redirect:login");
         }
     }
