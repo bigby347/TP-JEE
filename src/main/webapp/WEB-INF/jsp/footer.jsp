@@ -1,32 +1,10 @@
-<%@ include file="/WEB-INF/jsp/include.jsp" %>
-<html>
-<head>
-    <title>Home Page</title>
-    <%@ include file="/WEB-INF/jsp/head-bootstrap.jsp" %>
-</head>
-<body>
-<%@include file="navbar.jsp" %>
-<div class="container">
-    <h2 class="sub-header">Groups List</h2>
-
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th scope="col">Name</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${groups}" var="g">
-        <tr>
-            <td>
-                <a href="/group/show/${g.id}"><c:out value="${g.name}"/></a>
-            </td>
-        </tr>
-        </c:forEach>
-        </tbody>
-    </table>
-</div>
+<footer class="my-5 pt-5 text-muted text-center text-small">
+    <p class="mb-1">&copy; 2018-2019 Annuaire Inc.</p>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="#">Privacy</a></li>
+        <li class="list-inline-item"><a href="#">Terms</a></li>
+        <li class="list-inline-item"><a href="#">Support</a></li>
+    </ul>
+</footer>
 </body>
-
-
 </html>
