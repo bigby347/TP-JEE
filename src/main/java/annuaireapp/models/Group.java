@@ -10,7 +10,7 @@ import java.util.Set;
         @NamedQuery(name = "Group.findAll", query = "Select g From Groupe g ORDER BY g.name"),
         @NamedQuery(name = "Group.removeAll", query = "Delete From Groupe"),
         @NamedQuery(name = "Group.remove", query = "delete from Groupe g where g.id = :id"),
-        @NamedQuery(name = "Group.findByName",query = "Select g From Groupe g where g.name LIKE :research ORDER BY g.name")
+        @NamedQuery(name = "Group.findByName",query = "Select g From Groupe g where g.name LIKE UPPER(:research) ORDER BY g.name")
 })
 
 
