@@ -4,6 +4,7 @@ import annuaireapp.dao.IDao;
 import annuaireapp.dao.SpringConfiguration;
 import annuaireapp.models.Group;
 import annuaireapp.models.Person;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class DirectoryManager implements IDirectoryManager {
 
     @Autowired
     IDao dao;
+
+    @Autowired
+    IEmailManager emailManager;
 
     public DirectoryManager() {
     }
@@ -127,5 +131,22 @@ public class DirectoryManager implements IDirectoryManager {
         if (user.getId().equals(p.getId())) {
             dao.update(p);
         }
+    }
+
+    @Override
+    public boolean resetPassword(String email) {
+        Person person = dao.findPersonByEmail(email);
+        if(person != null){
+            String tempPassword = RandomStringUtils.randomAlphanumeric(10);
+            person.setPassword(tempPassword);
+            dao.update(person);
+            String emailBody = String.format(emailManager.getTemplate().getText(),
+                    person.getName() + " " + person.getFirstName(),
+                    person.getEmail(),
+                    tempPassword);
+            emailManager.sendMail(person.getEmail(),"Reset Password",emailBody);
+            return true;
+        }
+        return false;
     }
 }

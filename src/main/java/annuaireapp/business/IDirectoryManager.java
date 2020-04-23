@@ -36,4 +36,6 @@ public interface IDirectoryManager {
 
     // enregistrer une personne
     void savePerson(User user, Person p);
+
+    public boolean resetPassword(String email);
 }
