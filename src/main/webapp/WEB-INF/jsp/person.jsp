@@ -8,6 +8,7 @@
 <body class="d-flex flex-column h-100">
 <%@include file="navbar.jsp" %>
 <div class="container" style="margin-top:100px">
+    <!--
     <div class="panel panel-default">
         <div class="panel-heading"><h4>Profile</h4></div>
         <div class="panel-body">
@@ -67,10 +68,51 @@
 
                 </div>
             </div>
-
-
         </div>
     </div>
+    -->
+
+    <table class="table table-striped">
+        <tbody>
+        <tr>
+            <th scope="row">Name</th>
+            <td><c:out value="${person.name}"/></td>
+        </tr>
+        <tr>
+            <th scope="row">First Name</th>
+            <td><c:out value="${person.firstName}"/></td>
+        </tr>
+        <tr>
+            <th scope="row">Group</th>
+            <td><c:out value="${person.groupe.name}"/></td>
+        </tr>
+        <tr>
+            <th scope="row">Website</th>
+            <td><c:out value="${person.website}"/></td>
+        </tr>
+        <c:if test="${user.id !=0}">
+            <tr>
+                <th scope="row">Date Of Birth</th>
+                <td><c:out value="${person.birthDay}"/></td>
+            </tr>
+            <tr>
+                <th scope="row">Email</th>
+                <td><c:out value="${person.email}"/></td>
+            </tr>
+        </c:if>
+
+        <c:if test="${user.id == person.id}">
+            <tr>
+                <th scope="row">Password</th>
+                <td><c:out value="${person.password}"/></td>
+            </tr>
+        </c:if>
+        </tbody>
+    </table>
+    <c:if test="${user.id == person.id}">
+    <a href="/person/edit/${person.id}?groupId=${person.groupe.id}">
+        <button type="button" class="btn btn-primary">Modifier</button>
+    </a>
+    </c:if>
 </div>
-</body>
-</html>
+<%@include file="footer.jsp" %>

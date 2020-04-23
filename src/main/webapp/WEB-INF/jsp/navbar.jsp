@@ -1,4 +1,5 @@
 <c:url var="grouplist" value="/group/list"/>
+<c:url var="personList" value="/person/list"/>
 
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <a class="navbar-brand" href="/">Annuaire</a>
@@ -11,7 +12,7 @@
                 <a class="nav-link" href="${grouplist}">Groups List</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link disabled" href="#">Persons List</a>
+                <a class="nav-link" href="${personList}">Persons List</a>
             </li>
         </ul>
         <div class="btn-group" role="group" aria-label="Basic example">

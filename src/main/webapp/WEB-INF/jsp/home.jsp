@@ -24,15 +24,13 @@
             </p>
             </c:otherwise>
             </c:choose>
-
         </div>
     </div>
-
     <div class="row mb-2">
         <div class="col-md-6">
             <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                 <div class="col p-4 d-flex flex-column position-static">
-                    <strong class="d-inline-block mb-2 text-primary">Groups</strong>
+                    <a class="nav-link" href="${grouplist}"><strong class="d-inline-block mb-2 text-primary">Groups</strong></a>
                     <h3 class="mb-0">Groups List</h3>
                     <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
                     <form class="form-inline mt-2 mt-md-0" action="/searchGroups" method="post">
@@ -45,7 +43,7 @@
         <div class="col-md-6">
             <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                 <div class="col p-4 d-flex flex-column position-static">
-                    <strong class="d-inline-block mb-2 text-success">Persons</strong>
+                    <a class="nav-link" href="${personList}"><strong class="d-inline-block mb-2 text-success">Persons</strong></a>
                     <h3 class="mb-0">Persons List</h3>
                     <p class="mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
                     <form class="form-inline mt-2 mt-md-0" action="/searchPersons" method="post">
@@ -58,8 +56,4 @@
     </div>
 </div>
 </div>
-
-
-
-</body>
-</html>
+<%@include file="footer.jsp" %>
