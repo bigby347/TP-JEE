@@ -58,6 +58,7 @@ public class UserController {
             @RequestParam(value = "inputEmail", required = true) String inputEmail,
             @RequestParam(value = "inputPassword", required = true) String inputPassword
     ) {
+        if (user.getId() != 0) return new ModelAndView("redirect:login");
         if (manager.login(user, inputEmail, inputPassword)) {
             logger.info("Login user with id:" + user.getId());
             return new ModelAndView("redirect:" + previouspage, "user", user);
@@ -92,7 +93,7 @@ public class UserController {
         if(user.getId() != 0){
             return "redirect:home";
         }else {
-            return "redirect:reset";
+            return "resetPassword";
         }
     }
 

@@ -30,9 +30,8 @@
         <div class="col-md-6">
             <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                 <div class="col p-4 d-flex flex-column position-static">
-                    <a class="nav-link" href="${grouplist}"><strong class="d-inline-block mb-2 text-primary">Groups</strong></a>
-                    <h3 class="mb-0">Groups List</h3>
-                    <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
+                    <h3 class="mb-0 text-primary">Groups List</h3>
+                    <a class="nav-link" href="${grouplist}"><strong class="d-inline-block mb-2 text-primary">See Groups List >></strong></a>
                     <form class="form-inline mt-2 mt-md-0" action="/searchGroups" method="post">
                         <input class="form-control lg-2" name="inputGroupResearch" type="text" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
@@ -43,9 +42,8 @@
         <div class="col-md-6">
             <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                 <div class="col p-4 d-flex flex-column position-static">
-                    <a class="nav-link" href="${personList}"><strong class="d-inline-block mb-2 text-success">Persons</strong></a>
-                    <h3 class="mb-0">Persons List</h3>
-                    <p class="mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
+                    <h3 class="mb-0 text-success">Persons List</h3>
+                    <a class="nav-link" href="${personList}"><strong class="d-inline-block mb-2 text-success">See Persons list >></strong></a>
                     <form class="form-inline mt-2 mt-md-0" action="/searchPersons" method="post">
                         <input class="form-control md-2" name="inputPersonResearch" type="text" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>

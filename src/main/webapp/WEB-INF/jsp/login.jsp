@@ -23,7 +23,7 @@
     </form>
 
     <form method="get" action="/home">
-        <button type="submit" class="btn btn-default">
+        <button type="submit" class="btn btn-outline-secondary">
             <span class="glyphicon glyphicon-chevron-left"></span>Retour</a>
         </button>
     </form>
