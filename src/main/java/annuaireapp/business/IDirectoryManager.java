@@ -24,7 +24,7 @@ public interface IDirectoryManager {
 
     Collection<Group> findGroupsByName(User user, String research);
 
-    Collection<Person> findPersonsByName(User user, String research);
+    Collection<Person> searchPersons(User user,String name,String firstname);
 
     Person getUser(String email);
 

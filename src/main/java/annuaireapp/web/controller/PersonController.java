@@ -63,20 +63,21 @@ public class PersonController {
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
-    public String save(@ModelAttribute("person") @Valid Person person,@RequestParam(value = "groupId", required = false) Integer groupId, BindingResult result) {
+    public String save(@ModelAttribute("person") @Valid Person person,
+                       @RequestParam(value = "groupId", required = false) Integer groupId,
+                       BindingResult result) {
         if (result.hasErrors()) {
             return "personEdit";
         }
         if (groupId != null) {
             Group group = manager.findGroup(groupId);
-
             if (group != null) {
                 logger.info("Group " + groupId + " found");
             }
             person.setGroupe(group);
+            manager.savePerson(user, person);
         }
 
-        manager.savePerson(user, person);
         return "redirect:/person/show/" + person.getId();
     }
     @InitBinder

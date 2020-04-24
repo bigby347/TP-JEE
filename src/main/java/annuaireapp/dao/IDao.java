@@ -14,7 +14,7 @@ public interface IDao {
 
 	public Collection<Person>  findAllPersonsInGroup(Integer idGroup);
 
-	public Collection<Person> findPersonsByName(String research);
+	public Collection<Person> searchPersons(String name,String firstname);
 
 	public Collection<Group> findGroupsByName(String research);
 
@@ -25,5 +25,5 @@ public interface IDao {
 	public <T> void update(T t);
 
 	public <T> void remove(T t);
-	//public <T> Collection<T> findByStringProperty(Class<T> clazz, String propertyName, String propertyValue);
+
 }

@@ -1,6 +1,3 @@
-<c:url var="grouplist" value="/group/list"/>
-<c:url var="personList" value="/person/list"/>
-
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <a class="navbar-brand" href="/">Annuaire</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">

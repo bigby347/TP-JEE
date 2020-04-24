@@ -15,7 +15,9 @@ import java.util.Date;
         @NamedQuery(name = "Person.findAll", query = "Select p From Person p ORDER BY p.name"),
         @NamedQuery(name = "Person.removeAll", query = "Delete From Person "),
         @NamedQuery(name = "Person.remove", query = "Select p from Person p Where p.id = :id"),
-        @NamedQuery(name = "Person.findByName",query = "Select p From Person p Where p.name LIKE :research or p.firstName like :research"),
+        @NamedQuery(name = "Person.findByName",query = "Select p From Person p Where lower(p.name) LIKE lower(:name) ORDER BY p.name"),
+        @NamedQuery(name = "Person.findByFirstName",query = "Select p From Person p Where lower(p.firstName) like lower(:firstname) ORDER BY p.name"),
+        @NamedQuery(name = "Person.search",query = "Select p From Person p Where lower(p.name) LIKE lower(:name) and lower(p.firstName) like lower(:firstname) ORDER BY p.name"),
         @NamedQuery(name = "Person.findInGroup",query = "SELECT p FROM Person p WHERE p.groupe= :ownGroup ORDER BY p.name"),
         @NamedQuery(name = "Person.findByEmail",query = "Select p From Person p Where p.email = :email ORDER BY p.name")
 })

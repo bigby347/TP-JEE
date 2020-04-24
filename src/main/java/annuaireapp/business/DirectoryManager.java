@@ -83,8 +83,8 @@ public class DirectoryManager implements IDirectoryManager {
     }
 
     @Override
-    public Collection<Person> findPersonsByName(User user, String research) {
-        Collection<Person> persons = dao.findPersonsByName(research);
+    public Collection<Person> searchPersons(User user, String name, String firstname) {
+        Collection<Person> persons = dao.searchPersons(name,firstname);
         for(Person person :persons) {
             person.setPassword(null);
             /*Si aucun utilisateur n'est connecté on ne renvoie pas certaine info*/

@@ -47,14 +47,6 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="email" class="col-4 col-form-label">Email</label>
-                            <div class="col-8">
-                                <form:input  path="email" class="form-control here"/>
-                                <form:errors path="email" cssClass="alert alert-warning"
-                                             element="div"/>
-                            </div>
-                        </div>
-                        <div class="form-group row">
                             <label for="website" class="col-4 col-form-label">Website</label>
                             <div class="col-8">
                                 <form:input  path="website" class="form-control here"/>
@@ -62,6 +54,9 @@
                                              element="div"/>
                             </div>
                         </div>
+                                <form:hidden   path="email" class="form-control here"/>
+                                <form:errors path="email" cssClass="alert alert-warning"
+                                             element="div"/>
                         <div class="form-group row">
                             <label for="password" class="col-4 col-form-label">Password*</label>
                             <div class="col-8">
@@ -73,7 +68,7 @@
                         <div class="form-group row ">
                             <label for="groupe" class="col-4 col-form-label">Groupe*</label>
                             <div class="col-8">
-                                <form:input  disabled="true" path="groupe" value="${person.groupe.name}" class="form-control here"/>
+                                <form:input disabled="true" path="groupe" value="${person.groupe.name}" class="form-control here"/>
                                 <form:errors path="groupe" cssClass="alert alert-warning"
                                              element="div"/>
                             </div>

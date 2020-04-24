@@ -107,7 +107,7 @@ public class TestDao {
         p3.setName("totob");
         dao.add(p3);
 
-        Collection<Person> personList = dao.findPersonsByName("toto");
+        Collection<Person> personList = dao.searchPersons("toto","");
         System.out.println("lol");
 
         for (Person person :personList){

@@ -1,13 +1,10 @@
 package annuaireapp.web.controller;
 
 import annuaireapp.business.IDirectoryManager;
-import annuaireapp.business.IEmailManager;
 import annuaireapp.business.User;
-import annuaireapp.models.Group;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -83,8 +80,11 @@ public class UserController {
     }
 
     @RequestMapping(value = "/searchPersons")
-    public ModelAndView searchPersons(@RequestParam(value = "inputPersonResearch", required = true) String inputResearch) {
-        return new ModelAndView("personList", "persons", manager.findGroupsByName(user, inputResearch));
+    public ModelAndView searchPersons(
+            @RequestParam(value = "inputResearchName", required = false) String inputName,
+            @RequestParam(value = "inputResearchFirstName", required = false) String inputFirstName
+    ) {
+        return new ModelAndView("personList", "persons", manager.searchPersons(user, inputName,inputFirstName));
     }
 
     @RequestMapping(value = "/resetPassword", method = RequestMethod.GET)

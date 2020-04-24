@@ -45,7 +45,8 @@
                     <h3 class="mb-0 text-success">Persons List</h3>
                     <a class="nav-link" href="${personList}"><strong class="d-inline-block mb-2 text-success">See Persons list >></strong></a>
                     <form class="form-inline mt-2 mt-md-0" action="/searchPersons" method="post">
-                        <input class="form-control md-2" name="inputPersonResearch" type="text" placeholder="Search" aria-label="Search">
+                        <input class="form-control md-2" name="inputResearchName" type="text" placeholder="Name" aria-label="Search">
+                        <input class="form-control md-2" name="inputResearchFirstName" type="text" placeholder="First Name" aria-label="Search">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                     </form>
                 </div>
