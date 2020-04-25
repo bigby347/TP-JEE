@@ -1,5 +1,6 @@
 package annuaireapp.dao;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -125,7 +126,7 @@ public class Dao implements annuaireapp.dao.IDao {
 
     @Override
     public <T> void remove(T t) {
-        em.remove(t);
+        em.remove(em.contains(t) ? t : em.merge(t));
         logger.info("Entity" + t + "removed");
     }
 

@@ -28,7 +28,7 @@ public class Group implements Serializable {
 
 
     @OneToMany(//
-            cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE },
+            cascade = { CascadeType.MERGE, CascadeType.REMOVE },
             fetch = FetchType.LAZY, mappedBy = "groupe")
     private Set<Person> persons;
 
