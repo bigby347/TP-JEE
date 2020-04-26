@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/")
-public class MyController {
+public class MainController {
 
 	/*
 	 * Récupérer un message particulier dans le fichier de configuration pour ne pas
